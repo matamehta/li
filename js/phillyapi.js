@@ -8,12 +8,12 @@ phillyapi = {
       permits: "SELECT * FROM LI_PERMITS WHERE addresskey IN ('%s') ORDER BY permittype", // I used the IN sentence because there could be multiple address key separated by comma (,)
       licenses: "SELECT * FROM LI_BUSINESS_LICENSES WHERE eclipse_addressobjectid = '%s' ORDER BY licensetype",
       violations: "SELECT * FROM LI_VIOLATIONS WHERE addresskey IN ('%s') ORDER BY casenumber DESC",
-      appeals: "SELECT * FROM LI_APPEALS WHERE addresskey IN ('%s') ORDER BY date_scheduled DESC",
+      appeals: "SELECT * FROM LI_APPEALS_REV WHERE addresskey IN ('%s') ORDER BY date_scheduled DESC",
 
       permitsdetail: "SELECT * FROM LI_PERMITS WHERE permitnumber = '%s' AND addresskey IN ('%s')",
       licencesdetail: "SELECT * FROM LI_BUSINESS_LICENSES WHERE licensenum = '%s'",
       violationsdetail: "SELECT *  FROM LI_VIOLATIONS WHERE casenumber = '%s' AND addresskey IN ('%s')  ORDER BY violationdate DESC",
-      appealdetail: "SELECT * FROM LI_APPEALS WHERE appeal_key = '%s' AND addresskey IN ('%s') ORDER BY decisiondate DESC LIMIT 1 OFFSET 0",
+      appealdetail: "SELECT * FROM LI_APPEALS_REV WHERE appeal_key = '%s' AND addresskey IN ('%s') ORDER BY decisiondate DESC LIMIT 1 OFFSET 0",
       desitionshistory: "SELECT * FROM LI_BOARD_DECISIONS WHERE appealkey = '%s' ORDER BY decisiondate DESC",
       courthistory: "SELECT * FROM LI_COURT_APPEALS WHERE appealkey = '%s' ORDER BY courtactiondate DESC",
 
@@ -204,7 +204,6 @@ phillyapi = {
     if (sorting.length > 0) {
       sorted.push(sorting);
     }
-
     return sorted;
   },
 
@@ -236,7 +235,7 @@ phillyapi = {
       case 'RB_BBS':
         return 'Building Board Appeals';
       case 'RB_LIRB':
-        return 'L&mp;I Review Board';
+        return 'L&I Review Board';
       case 'RB_ZBA':
         return 'Zoning Board';
       default:
